@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>H+ 后台主题UI框架 - 数据表格</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet"/>
+    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet"/>
+    <!-- Data Tables -->
+    <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="/css/animate.min.css" rel="stylesheet"/>
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet"/>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>首页 <small>用户管理</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-5 m-b-xs">
+                            <select class="input-sm form-control input-s-sm inline" style="width: 50%">
+                                <option value="">请选择</option>
+                                <option value="1">普通会员用户</option>
+                                <option value="2">实名认证用户</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5 m-b-xs">
+                            <select class="input-sm form-control input-s-sm inline" id="search_state" style="width: 50%">
+                                <option value="">请选择</option>
+                                <option value="1">正常</option>
+                                <option value="2">锁定</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入关键词" id="search_name" class="input-sm form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover dataTables-example" id="example1">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="checkAll"/></th>
+                                <th>用户名</th>
+                                <th>昵称</th>
+                                <th>手机号</th>
+                                <th>用户类型</th>
+                                <th>用户状态</th>
+                                <th>邮箱</th>
+                                <th>注册时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/bootstrap/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/js/content.min.js?v=1.0.0"></script>
+<script >
+    var table;
+    $(function () {
+        table = $('#example1').DataTable({
+            //开启服务器模式
+            serverSide: true,
+            ajax:{
+                url:'/bam/imory_userAjax/listImoryUser',
+                data:function (d) {
+                    d.name = $("#search_name").val(),
+                        d.level = $("#search_level").val(),
+                        d.state = $("#search_state").val()
+                }
+            },
+            columns: [
+                {data:"uid"},
+                { data: "username" ,defaultContent:"-"},
+                { data: "nickName" ,defaultContent:"-"},
+                { data: "mobile" ,defaultContent:"-"},
+                { data: "level",defaultContent:"-"},
+                { data: "state",defaultContent:"-"},
+                { data: "email" ,defaultContent:""},
+                { data: "reg_time" ,defaultContent:"-"},
+            ],
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function (data, type, row) {
+                        return  '<input type="checkbox" value="' + row.id + '" name="idChk"/>';
+                    }
+                },
+                {
+                    targets: 4,
+                    render: function(data, type, row){
+                        if(row.level==1){
+                            return '<font color="red">普通会员用户</font>';
+                        }
+                        if(row.level==2){
+                            return '<font color="green">实名认证用户</font>';
+                        }
+                    }
+                },
+                {
+                    targets: 5,
+                    render: function(data, type, row){
+                        if(row.state==1){
+                            return '<font color="green">正常</font>';
+                        }
+                        if(row.state==2){
+                            return '<font color="red">锁定</font>';
+                        }
+                    }
+                },
+                {
+                    targets: 8,
+                    render: function (data, type, row) {
+                        var _html = '';
+                        _html +=    '<button class="btn btn-info btn-sm type="button" onclick="lockAccountById(' + row.uid +',' + row.state+');"><i class="fa fa-paste"></i>锁定账号</button>&nbsp;&nbsp;';
+                        _html +=    '<button class="btn btn-info btn-sm" type="button" onclick="resetPsdById(' + row.uid + ');"><i class="fa fa-paste"></i>重置密码</button>&nbsp;&nbsp;';
+                        _html +=    '<button class="btn btn-info btn-sm" type="button" onclick="smrzById(' + row.uid + ','+row.level+');"><i class="fa fa-paste"></i>实名认证</button>';
+                        return  _html;
+                    }
+                }],
+            paging: true,
+            lengthChange: false,
+            searching: false,
+            ordering: false,
+            info: true,
+            autoWidth: false,
+            paging: true,
+            scrollX:true,
+            fnDrawCallback: function (oSettings) {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    increaseArea: '10%' // optional
+                });
+            }
+        });
+
+        $("#checkAll").on('ifChanged', function(event){
+            if($(this).is(":checked"))
+            {
+                $("input[type='checkbox'][name='idChk']").iCheck('check');
+            }
+            else
+            {
+                $("input[type='checkbox'][name='idChk']").iCheck('uncheck');
+            }
+        });
+
+    });
+
+
+    //查询
+    function doQuery()
+    {
+        table.ajax.reload();
+    }
+    //锁定账号
+    function lockAccountById(id,state)
+    {
+        if(state == 2)
+        {
+            toastr.info("已锁定");
+            return;
+        }else
+        {
+            $.ajax({
+                url:"/bam/imory_userAjax/lockAccount",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data:{id : id},
+                dataType: "json",
+                type: "POST",
+                success : function(data)
+                {
+                    if(data.success)
+                    {
+                        toastr.success("账号锁定成功");
+                        table.ajax.reload();
+                    }else
+                    {
+                        toastr.error("账号锁定失败");
+                    }
+                }
+            });
+        }
+    }
+
+    //重置密码
+    function resetPsdById(id)
+    {
+        $.ajax({
+            url:"/bam/imory_userAjax/resetPsd",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{id : id},
+            dataType: "json",
+            type: "POST",
+            success : function(data)
+            {
+                if(data.success)
+                {
+                    toastr.success("密码重置成功");
+                    table.ajax.reload();
+                }else
+                {
+                    toastr.error("密码重置失败");
+                }
+            }
+        });
+    }
+
+    //实名认证
+    function smrzById(id,level)
+    {
+        if(level == 2)
+        {
+            toastr.info("已认证");
+            return;
+        }else
+        {
+            $.ajax({
+                url:"/bam/imory_userAjax/smrz",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data:{id : id},
+                dataType: "json",
+                type: "POST",
+                success : function(data)
+                {
+                    if(data.success)
+                    {
+                        toastr.success("认证成功");
+                        table.ajax.reload();
+                    }else
+                    {
+                        toastr.error("认证失败");
+                    }
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
