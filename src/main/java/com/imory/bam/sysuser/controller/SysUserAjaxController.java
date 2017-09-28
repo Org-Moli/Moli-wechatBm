@@ -1,4 +1,4 @@
-package com.imory.bam.controller;
+package com.imory.bam.sysuser.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

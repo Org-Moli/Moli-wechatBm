@@ -1,4 +1,4 @@
-package com.imory.bam.controller;
+package com.imory.bam.sysuser.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

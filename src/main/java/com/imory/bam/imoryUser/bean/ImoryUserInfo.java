@@ -1,4 +1,4 @@
-package com.imory.bam.sysuser.bean;
+package com.imory.bam.imoryUser.bean;
 
 import java.util.Date;
 

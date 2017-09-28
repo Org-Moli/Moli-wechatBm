@@ -1,4 +1,4 @@
-package com.imory.bam.sysuser.dao;
+package com.imory.bam.imoryUser.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-import com.imory.bam.sysuser.bean.ImoryUserInfo;
+import com.imory.bam.imoryUser.bean.ImoryUserInfo;
 
 @Mapper
 public interface ImoryUserMapper {

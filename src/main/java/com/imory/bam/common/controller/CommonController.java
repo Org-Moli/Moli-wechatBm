@@ -1,4 +1,4 @@
-package com.imory.bam.controller;
+package com.imory.bam.common.controller;
 
 import com.imory.bam.sysuser.bean.SysUser;
 import com.imory.bam.sysuser.service.SysUserService;

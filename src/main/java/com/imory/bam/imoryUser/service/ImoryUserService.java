@@ -1,4 +1,4 @@
-package com.imory.bam.sysuser.service;
+package com.imory.bam.imoryUser.service;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.imory.bam.sysuser.bean.ImoryUserInfo;
-import com.imory.bam.sysuser.dao.ImoryUserMapper;
+import com.imory.bam.imoryUser.bean.ImoryUserInfo;
+import com.imory.bam.imoryUser.dao.ImoryUserMapper;
 
 @Service
 public class ImoryUserService {

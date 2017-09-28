@@ -1,4 +1,4 @@
-package com.imory.bam.sysuser.dao;
+package com.imory.bam.imoryUser.dao;
 
 import java.util.Map;
 

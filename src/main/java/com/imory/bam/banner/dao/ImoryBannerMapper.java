@@ -1,11 +1,10 @@
-package com.imory.bam.sysuser.dao;
+package com.imory.bam.banner.dao;
 
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.SelectKey;
 
-import com.imory.bam.sysuser.bean.ImoryBanner;
+import com.imory.bam.banner.bean.ImoryBanner;
 
 @Mapper
 public interface ImoryBannerMapper {

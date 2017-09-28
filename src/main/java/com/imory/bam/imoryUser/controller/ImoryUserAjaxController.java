@@ -1,4 +1,4 @@
-package com.imory.bam.controller;
+package com.imory.bam.imoryUser.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.imory.bam.sysuser.bean.ImoryUserInfo;
-import com.imory.bam.sysuser.service.ImoryUserService;
+import com.imory.bam.imoryUser.bean.ImoryUserInfo;
+import com.imory.bam.imoryUser.service.ImoryUserService;
 
 @RestController
 @RequestMapping("/bam/imory_userAjax")

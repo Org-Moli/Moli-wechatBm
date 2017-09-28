@@ -1,24 +1,21 @@
-package com.imory.bam.controller;
+package com.imory.bam.banner.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.imory.bam.sysuser.bean.ImoryBanner;
-import com.imory.bam.sysuser.service.ImoryBannerService;
+import com.imory.bam.banner.bean.ImoryBanner;
+import com.imory.bam.banner.service.ImoryBannerService;
 
 @RestController
 @RequestMapping("/bam/imoryBanner")
